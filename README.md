@@ -23,11 +23,24 @@ Get the latest installer from [GitHub Releases](https://github.com/zhaoryder/ds-
 | Windows x64 | `DeepSeek-Pet-0.1.1-windows-x64.exe` |
 | Linux x64 | `.AppImage` or `.deb` |
 
-macOS builds are structurally signed but not Apple-notarized. If macOS blocks the first launch, open **System Settings → Privacy & Security** and choose **Open Anyway**. If it still reports that the app is damaged, run:
+### Installing on macOS
+
+The macOS build is structurally signed but not Apple-notarized, so macOS may block its first launch. Follow these steps:
+
+1. Open the downloaded `.dmg` and drag **DeepSeek Pet** into the **Applications** folder.
+2. Open **Applications** and try to launch **DeepSeek Pet** once. If macOS blocks it, close the warning.
+3. Open **System Settings** from the Apple menu.
+4. Select **Privacy & Security** in the sidebar, then scroll down to the **Security** section.
+5. Find the message saying that **DeepSeek Pet was blocked** and click **Open Anyway**.
+6. Authenticate with Touch ID or your Mac password, then click **Open Anyway** again in the confirmation dialog.
+
+You only need to do this for the first launch. If macOS instead says that the app is damaged, make sure it is already in **Applications**, open **Terminal**, and run:
 
 ```bash
 xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
 ```
+
+Then open **DeepSeek Pet** again from **Applications**.
 
 ## What it does
 

@@ -23,11 +23,24 @@
 | Windows x64 | `DeepSeek-Pet-0.1.1-windows-x64.exe` |
 | Linux x64 | `.AppImage` 或 `.deb` |
 
-macOS 版本已经完成结构签名，但暂未经过 Apple 公证。如果首次启动被拦截，请打开“系统设置 → 隐私与安全性”，点击“仍要打开”。如果仍提示应用已损坏，请运行：
+### macOS 安装方法
+
+macOS 版本已经完成结构签名，但暂未经过 Apple 公证，因此第一次打开时可能被系统拦截。请按照下面的步骤操作：
+
+1. 打开下载好的 `.dmg`，把 **DeepSeek Pet** 拖入 **Applications（应用程序）** 文件夹。
+2. 进入“应用程序”，尝试打开一次 **DeepSeek Pet**。如果系统弹出拦截提示，先关闭提示框。
+3. 点击屏幕左上角的 Apple 菜单，打开“系统设置”。
+4. 在左侧选择“隐私与安全性”，然后向下滚动到“安全性”区域。
+5. 找到“已阻止使用 DeepSeek Pet”之类的提示，点击“仍要打开”。
+6. 使用 Touch ID 或 Mac 密码确认，然后在弹出的确认窗口中再次点击“仍要打开”。
+
+以上操作通常只需要执行一次。如果系统提示“DeepSeek Pet 已损坏”，请先确认应用已经放入“应用程序”文件夹，然后打开“终端”并运行：
 
 ```bash
 xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
 ```
+
+运行完成后，再从“应用程序”中打开 **DeepSeek Pet**。
 
 ## 功能
 
