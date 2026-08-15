@@ -6,9 +6,10 @@ Repository: https://github.com/zhaoryder/ds-pet
 
 1. DeepSeek Harness Discord — the most relevant audience. Post in the channel intended for projects, plugins, or showcases.
 2. Show HN — use the English copy below and stay available to answer technical questions.
-3. V2EX or Linux.do — publish one Chinese post, not duplicates across many sections.
-4. X / Bluesky — attach `assets/marketing/social-preview.jpg` and the demo GIF from the README.
-5. Reply to every genuine question with technical detail. Do not ask for stars; ask people to try it and report problems.
+3. r/DeepSeek — recent DSH/tool posts show a directly relevant audience. Follow the subreddit rules and use one useful showcase post.
+4. V2EX or Linux.do — publish one Chinese post, not duplicates across many sections.
+5. X / Bluesky — attach `assets/marketing/social-preview.jpg` and the demo GIF from the README.
+6. Reply to every genuine question with technical detail. Do not ask for stars; ask people to try it and report problems.
 
 ## DeepSeek Harness Discord
 
@@ -55,6 +56,24 @@ Body:
 > 项目和下载：https://github.com/zhaoryder/ds-pet
 >
 > 欢迎试用，尤其想听听 Windows 启动和状态识别有没有问题。
+
+## Reddit r/DeepSeek
+
+Title:
+
+> I made a desktop pet that shows what my DeepSeek Harness sessions are doing
+
+Body:
+
+> I kept losing track of whether a DSH session was still working, waiting for approval, or already finished, so I made a small open-source desktop companion for it.
+>
+> DeepSeek Pet shows those states as a cartoon whale and supports Windows, macOS, and Linux. It also has an offline action to start `dsh web`, plus selectable pet styles and English/Chinese UI.
+>
+> Demo and installers: https://github.com/zhaoryder/ds-pet
+>
+> I’m looking for practical feedback, especially from people running more than one DSH session: are the states useful, and what should the pet show next?
+
+Do not cross-post this unchanged to multiple Reddit communities. Check the current subreddit rules and disclose that you are the maker.
 
 ## X / Bluesky
 
