@@ -9,6 +9,10 @@
 一只住在桌面角落的卡通鲸鱼，会实时跟随 DeepSeek Harness（DSH）会话改变动作和表情。
 
 <p align="center">
+  <img src="assets/marketing/social-preview.jpg" width="100%" alt="DeepSeek Pet——让 DSH 会话状态活在桌面上">
+</p>
+
+<p align="center">
   <img src="preview/deepseek-pet-demo.gif" width="360" alt="DeepSeek Pet 会话状态动画">
 </p>
 

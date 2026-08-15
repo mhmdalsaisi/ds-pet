@@ -9,6 +9,10 @@ English · [简体中文](README.zh-CN.md)
 A small cartoon whale that lives on your desktop and reacts to DeepSeek Harness (DSH) sessions in real time.
 
 <p align="center">
+  <img src="assets/marketing/social-preview.jpg" width="100%" alt="DeepSeek Pet — your DSH sessions, alive on the desktop">
+</p>
+
+<p align="center">
   <img src="preview/deepseek-pet-demo.gif" width="360" alt="DeepSeek Pet switching between session states">
 </p>
 
