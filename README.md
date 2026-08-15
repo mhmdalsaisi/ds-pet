@@ -1,37 +1,54 @@
 # DeepSeek Pet
 
-卡通风格的 DeepSeek Harness（DSH）桌面宠物。
+English · [简体中文](README.zh-CN.md)
 
-![DeepSeek Pet demo](preview/deepseek-pet-demo.gif)
+[![Release](https://img.shields.io/github/v/release/zhaoryder/ds-pet?display_name=tag)](https://github.com/zhaoryder/ds-pet/releases/latest)
+[![Build](https://github.com/zhaoryder/ds-pet/actions/workflows/build.yml/badge.svg)](https://github.com/zhaoryder/ds-pet/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## 下载
+A small cartoon whale that lives on your desktop and reacts to DeepSeek Harness (DSH) sessions in real time.
 
-前往 [Releases](https://github.com/zhaoryder/ds-pet/releases/latest) 下载对应平台安装包。
+<p align="center">
+  <img src="preview/deepseek-pet-demo.gif" width="360" alt="DeepSeek Pet switching between session states">
+</p>
 
-- macOS：Apple Silicon / Intel
-- Windows：x64 `.exe`
-- Linux：x64 `.AppImage` / `.deb`
+## Download
 
-## 功能
+Get the latest installer from [GitHub Releases](https://github.com/zhaoryder/ds-pet/releases/latest).
 
-- 实时显示 DSH 会话状态
-- 工作、思考、等待确认、完成、错误、睡眠和离线动画
-- 经典蓝鲸、软糖、夜航、像素四种风格
-- 设置音效、风格、DSH 地址、减少动效和开机启动
-- DSH 离线时可直接启动或安装 DSH
-- 拖拽、点击互动、托盘菜单和鼠标穿透
-- 根据系统语言自动选择中文或英文界面
+| Platform | Package |
+| --- | --- |
+| macOS Apple Silicon | `DeepSeek-Pet-0.1.0-mac-arm64.dmg` |
+| macOS Intel | `DeepSeek-Pet-0.1.0-mac-x64.dmg` |
+| Windows x64 | `DeepSeek-Pet-0.1.0-windows-x64.exe` |
+| Linux x64 | `.AppImage` or `.deb` |
 
-## 运行
+macOS builds are not notarized yet. On first launch, Control-click the app, choose **Open**, and confirm.
+
+## What it does
+
+- Mirrors working, planning, approval, completion, error, sleep, and offline states from DSH.
+- Includes Classic Blue, Candy Pastel, Night Flight, and Retro Pixel styles.
+- Supports sound, reduced motion, launch at login, drag, poke, tray controls, and mouse-through mode.
+- Can start `dsh web`; if DSH is missing, it can install `@deepseek-ai/dsh` with npm.
+- Selects English or Chinese from the system language.
+
+## Requirements
+
+- Windows 10/11, macOS, or a modern x64 Linux desktop
+- [Node.js](https://nodejs.org/) when installing DSH from the app
+- DSH Web at `http://127.0.0.1:3080` by default
+
+## Run from source
 
 ```bash
 npm install
 npm start
 ```
 
-默认连接 `http://127.0.0.1:3080`。
+Use `DS_PET_URL` or the settings window to connect to another DSH address.
 
-## 构建
+## Build
 
 ```bash
 npm run build:mac
@@ -39,8 +56,8 @@ npm run build:win
 npm run build:linux
 ```
 
-GitHub Actions 会在 Windows、macOS 和 Ubuntu runner 上分别构建安装包，并自动发布到 Release。
+Tagged releases are built natively on macOS, Windows, and Ubuntu by [GitHub Actions](.github/workflows/build.yml).
 
-## 许可证
+## License
 
-MIT License，见 [LICENSE](LICENSE)。
+[MIT](LICENSE) © 2026 zhaoryder.

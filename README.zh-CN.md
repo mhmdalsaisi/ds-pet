@@ -1,0 +1,63 @@
+# DeepSeek Pet
+
+[English](README.md) · 简体中文
+
+[![Release](https://img.shields.io/github/v/release/zhaoryder/ds-pet?display_name=tag)](https://github.com/zhaoryder/ds-pet/releases/latest)
+[![Build](https://github.com/zhaoryder/ds-pet/actions/workflows/build.yml/badge.svg)](https://github.com/zhaoryder/ds-pet/actions/workflows/build.yml)
+[![许可证：MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+一只住在桌面角落的卡通鲸鱼，会实时跟随 DeepSeek Harness（DSH）会话改变动作和表情。
+
+<p align="center">
+  <img src="preview/deepseek-pet-demo.gif" width="360" alt="DeepSeek Pet 会话状态动画">
+</p>
+
+## 下载
+
+从 [GitHub Releases](https://github.com/zhaoryder/ds-pet/releases/latest) 下载最新版安装包。
+
+| 平台 | 安装包 |
+| --- | --- |
+| macOS Apple Silicon | `DeepSeek-Pet-0.1.0-mac-arm64.dmg` |
+| macOS Intel | `DeepSeek-Pet-0.1.0-mac-x64.dmg` |
+| Windows x64 | `DeepSeek-Pet-0.1.0-windows-x64.exe` |
+| Linux x64 | `.AppImage` 或 `.deb` |
+
+macOS 版本暂未经过公证。首次启动时请按住 Control 点击应用，选择“打开”，然后确认。
+
+## 功能
+
+- 跟随 DSH 显示工作、思考、等待确认、完成、错误、睡眠和离线状态。
+- 提供经典蓝鲸、软糖、夜航和像素四种风格。
+- 支持音效、减少动效、开机启动、拖拽、点击互动、托盘菜单和鼠标穿透。
+- 可以启动 `dsh web`；未安装 DSH 时，可通过 npm 安装 `@deepseek-ai/dsh`。
+- 根据系统语言自动选择中文或英文界面。
+
+## 运行要求
+
+- Windows 10/11、macOS，或现代 x64 Linux 桌面系统
+- 从应用内安装 DSH 时需要 [Node.js](https://nodejs.org/)
+- 默认连接地址为 `http://127.0.0.1:3080`
+
+## 从源码运行
+
+```bash
+npm install
+npm start
+```
+
+可以通过 `DS_PET_URL` 或设置窗口修改 DSH 地址。
+
+## 构建
+
+```bash
+npm run build:mac
+npm run build:win
+npm run build:linux
+```
+
+版本标签会触发 [GitHub Actions](.github/workflows/build.yml)，分别在 macOS、Windows 和 Ubuntu 上原生构建安装包。
+
+## 许可证
+
+[MIT](LICENSE) © 2026 zhaoryder。
