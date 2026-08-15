@@ -18,12 +18,16 @@ Get the latest installer from [GitHub Releases](https://github.com/zhaoryder/ds-
 
 | Platform | Package |
 | --- | --- |
-| macOS Apple Silicon | `DeepSeek-Pet-0.1.0-mac-arm64.dmg` |
-| macOS Intel | `DeepSeek-Pet-0.1.0-mac-x64.dmg` |
-| Windows x64 | `DeepSeek-Pet-0.1.0-windows-x64.exe` |
+| macOS Apple Silicon | `DeepSeek-Pet-0.1.1-mac-arm64.dmg` |
+| macOS Intel | `DeepSeek-Pet-0.1.1-mac-x64.dmg` |
+| Windows x64 | `DeepSeek-Pet-0.1.1-windows-x64.exe` |
 | Linux x64 | `.AppImage` or `.deb` |
 
-macOS builds are not notarized yet. On first launch, Control-click the app, choose **Open**, and confirm.
+macOS builds are structurally signed but not Apple-notarized. If macOS blocks the first launch, open **System Settings → Privacy & Security** and choose **Open Anyway**. If it still reports that the app is damaged, run:
+
+```bash
+xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
+```
 
 ## What it does
 

@@ -29,6 +29,35 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:${{ matrix.platform }}
+      - name: Verify macOS disk images and app signatures
+        if: matrix.platform == 'mac'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for dmg in release/*.dmg; do
+            hdiutil verify "$dmg"
+            mount_dir="$(mktemp -d)"
+            hdiutil attach -readonly -nobrowse -mountpoint "$mount_dir" "$dmg"
+            app_path="$(find "$mount_dir" -maxdepth 1 -name '*.app' -print -quit)"
+            test -n "$app_path"
+            codesign --verify --deep --strict --verbose=2 "$app_path"
+            hdiutil detach "$mount_dir"
+          done
+      - name: Verify Windows installer
+        if: matrix.platform == 'win'
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem release/*.exe | Select-Object -First 1
+          if (-not $installer -or $installer.Length -lt 1MB) { throw 'Windows installer is missing or empty' }
+          $header = [System.IO.File]::ReadAllBytes($installer.FullName)[0..1]
+          if ($header[0] -ne 0x4D -or $header[1] -ne 0x5A) { throw 'Windows installer is not a PE executable' }
+      - name: Verify Linux packages
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          file release/*.AppImage | grep -q 'ELF 64-bit'
+          dpkg-deb --info release/*.deb >/dev/null
       - uses: actions/upload-artifact@v4
         if: matrix.platform == 'mac'
         with:

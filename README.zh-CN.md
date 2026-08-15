@@ -18,12 +18,16 @@
 
 | 平台 | 安装包 |
 | --- | --- |
-| macOS Apple Silicon | `DeepSeek-Pet-0.1.0-mac-arm64.dmg` |
-| macOS Intel | `DeepSeek-Pet-0.1.0-mac-x64.dmg` |
-| Windows x64 | `DeepSeek-Pet-0.1.0-windows-x64.exe` |
+| macOS Apple Silicon | `DeepSeek-Pet-0.1.1-mac-arm64.dmg` |
+| macOS Intel | `DeepSeek-Pet-0.1.1-mac-x64.dmg` |
+| Windows x64 | `DeepSeek-Pet-0.1.1-windows-x64.exe` |
 | Linux x64 | `.AppImage` 或 `.deb` |
 
-macOS 版本暂未经过公证。首次启动时请按住 Control 点击应用，选择“打开”，然后确认。
+macOS 版本已经完成结构签名，但暂未经过 Apple 公证。如果首次启动被拦截，请打开“系统设置 → 隐私与安全性”，点击“仍要打开”。如果仍提示应用已损坏，请运行：
+
+```bash
+xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
+```
 
 ## 功能
 

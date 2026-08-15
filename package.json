@@ -1,7 +1,7 @@
 {
   "name": "ds-pet",
   "productName": "DeepSeek Pet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "基于 DeepSeek 鲸鱼形象的桌面宠物，与 DeepSeek Harness (DSH) 实时联动",
   "main": "main.js",
   "private": true,
@@ -36,6 +36,7 @@
     "directories": {
       "output": "release"
     },
+    "afterSign": "scripts/after-sign.js",
     "win": {
       "target": [
         {
