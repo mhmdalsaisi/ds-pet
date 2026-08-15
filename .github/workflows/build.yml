@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   build:
+    fail-fast: false
     strategy:
       matrix:
         include:
@@ -38,13 +39,17 @@ jobs:
         if: matrix.platform == 'win'
         with:
           name: ds-pet-${{ matrix.platform }}
-          path: release/*.{exe,msi}
+          path: |
+            release/*.exe
+            release/*.msi
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: matrix.platform == 'linux'
         with:
           name: ds-pet-${{ matrix.platform }}
-          path: release/*.{AppImage,deb}
+          path: |
+            release/*.AppImage
+            release/*.deb
           if-no-files-found: error
 
   release:
