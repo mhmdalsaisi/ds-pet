@@ -13,8 +13,8 @@
 const { app, BrowserWindow, Tray, Menu, ipcMain, screen, shell, nativeImage, globalShortcut, Notification } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
-const { spawn } = require('node:child_process');
 const net = require('node:net');
+const { spawnCli } = require('./lib/cli-process');
 
 // 已知修复: AMD 显卡 + Windows 下窗口不绘制的 Chromium 问题
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion');
@@ -412,12 +412,17 @@ function findExecutable(name) {
 }
 
 function installDsh() {
-  const npm = findExecutable('npm') || findExecutable('npm.cmd');
+  const npm = findExecutable('npm');
   if (!npm) return Promise.reject(new Error('npm was not found. Install Node.js first.'));
   return new Promise((resolve, reject) => {
-    const child = spawn(npm, ['install', '--global', '@deepseek-ai/dsh'], { stdio: 'ignore', windowsHide: true });
+    const child = spawnCli(npm, ['install', '--global', '@deepseek-ai/dsh'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+    let installError = '';
+    child.stdout?.on('data', (chunk) => { installError = String(chunk).trim().slice(-1200); });
+    child.stderr?.on('data', (chunk) => { installError = String(chunk).trim().slice(-1200); });
     child.once('error', reject);
-    child.once('exit', (code) => code === 0 ? resolve(findExecutable('dsh')) : reject(new Error(`npm install exited with code ${code}`)));
+    child.once('exit', (code) => code === 0
+      ? resolve(findExecutable('dsh'))
+      : reject(new Error(installError || `npm install exited with code ${code}`)));
   });
 }
 
@@ -454,9 +459,10 @@ function startDsh() {
       const ready = dsh ? Promise.resolve(dsh) : installDsh();
       return ready.then((command) => {
         if (!command) throw new Error('DSH installation completed but dsh was not found');
+        dshLastError = '';
         const commandDir = path.dirname(command);
         const childEnv = { ...process.env, PATH: `${commandDir}${path.delimiter}${process.env.PATH || ''}`, DSH_HOME: process.env.DSH_HOME || path.join(app.getPath('home'), '.dsh') };
-        dshProcess = spawn(command, ['web'], { cwd: app.getPath('home'), env: childEnv, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+        dshProcess = spawnCli(command, ['web'], { cwd: app.getPath('home'), env: childEnv, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
         const report = (chunk) => { dshLastError = String(chunk).trim().slice(-1200); };
         dshProcess.stdout?.on('data', report);
         dshProcess.stderr?.on('data', report);

@@ -42,6 +42,17 @@ xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
 
 Then open **DeepSeek Pet** again from **Applications**.
 
+### Installing on Windows with Microsoft Edge
+
+Windows and Microsoft Edge may warn about the installer because it does not yet have a commercial code-signing certificate. If Edge blocks the download:
+
+1. Open Edge's **Downloads** panel by clicking the download icon in the top-right corner, or press `Ctrl+J`.
+2. Find the blocked **DeepSeek Pet** installer and click **Keep**.
+3. Click the arrow or **Show more** next to the warning, then choose **Keep anyway**.
+4. Open the downloaded `.exe`. If Microsoft Defender SmartScreen appears, click **More info**, then **Run anyway**.
+
+Only continue if the file was downloaded from this repository's official [GitHub Releases](https://github.com/zhaoryder/ds-pet/releases/latest) page.
+
 ## What it does
 
 - Mirrors working, planning, approval, completion, error, sleep, and offline states from DSH.

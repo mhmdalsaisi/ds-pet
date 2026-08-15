@@ -42,6 +42,17 @@ xattr -d com.apple.quarantine "/Applications/DeepSeek Pet.app"
 
 运行完成后，再从“应用程序”中打开 **DeepSeek Pet**。
 
+### Windows 使用 Microsoft Edge 安装
+
+由于安装包暂时没有商业代码签名证书，Windows 和 Microsoft Edge 可能会拦截下载。如果 Edge 提示文件不安全：
+
+1. 点击 Edge 右上角的下载图标，或者按 `Ctrl+J` 打开“下载”页面。
+2. 找到被拦截的 **DeepSeek Pet** 安装包，点击“保留”。
+3. 点击警告旁边的箭头或“显示详细信息”，然后选择“仍然保留”。
+4. 打开下载好的 `.exe`。如果出现 Microsoft Defender SmartScreen 提示，点击“更多信息”，再点击“仍要运行”。
+
+请只保留从本项目官方 [GitHub Releases](https://github.com/zhaoryder/ds-pet/releases/latest) 页面下载的文件。
+
 ## 功能
 
 - 跟随 DSH 显示工作、思考、等待确认、完成、错误、睡眠和离线状态。
