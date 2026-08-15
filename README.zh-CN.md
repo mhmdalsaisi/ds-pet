@@ -18,9 +18,9 @@
 
 | 平台 | 安装包 |
 | --- | --- |
-| macOS Apple Silicon | `DeepSeek-Pet-0.1.1-mac-arm64.dmg` |
-| macOS Intel | `DeepSeek-Pet-0.1.1-mac-x64.dmg` |
-| Windows x64 | `DeepSeek-Pet-0.1.1-windows-x64.exe` |
+| macOS Apple Silicon | `DeepSeek-Pet-0.1.2-mac-arm64.dmg` |
+| macOS Intel | `DeepSeek-Pet-0.1.2-mac-x64.dmg` |
+| Windows x64 | `DeepSeek-Pet-0.1.2-windows-x64.exe` |
 | Linux x64 | `.AppImage` 或 `.deb` |
 
 ### macOS 安装方法
