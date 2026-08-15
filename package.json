@@ -1,0 +1,57 @@
+{
+  "name": "ds-pet",
+  "productName": "DeepSeek Pet",
+  "version": "0.1.0",
+  "description": "基于 DeepSeek 鲸鱼形象的桌面宠物，与 DeepSeek Harness (DSH) 实时联动",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "icons": "node scripts/gen-icon.js",
+    "preview": "node scripts/gen-preview.js",
+    "build": "npm run build:all",
+    "build:win": "electron-builder --win --publish never",
+    "build:mac": "electron-builder --mac --publish never",
+    "build:linux": "electron-builder --linux --publish never",
+    "build:all": "electron-builder --win --mac --linux --publish never"
+  },
+  "author": { "name": "ds-pet", "email": "maintainers@example.com" },
+  "homepage": "https://github.com/zhaoryder/ds-pet",
+  "license": "MIT",
+  "build": {
+    "appId": "com.dspet.whale",
+    "productName": "DeepSeek Pet",
+    "asar": true,
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": { "output": "release" },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "assets/icon.png",
+      "artifactName": "DeepSeek-Pet-${version}-windows-${arch}.${ext}"
+    },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["arm64", "x64"] }],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.utilities",
+      "artifactName": "DeepSeek-Pet-${version}-mac-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [{ "target": "AppImage", "arch": ["x64"] }, { "target": "deb", "arch": ["x64"] }],
+      "icon": "assets/icon.png",
+      "category": "Utility",
+      "artifactName": "DeepSeek-Pet-${version}-linux-${arch}.${ext}"
+    },
+    "dmg": { "title": "DeepSeek Pet" }
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "sharp": "^0.35.3",
+    "electron-builder": "^26.0.12"
+  }
+}

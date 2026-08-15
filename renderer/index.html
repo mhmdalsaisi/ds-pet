@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
+  <title>DeepSeek Pet</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="pet-root">
+
+    <div id="status-dot" title="DSH 状态"></div>
+
+    <div id="bubble" class="hidden" role="tooltip">
+      <div class="b-head">
+        <span id="b-state">空闲</span>
+        <span id="b-time"></span>
+      </div>
+      <div id="b-title">正在连接 DeepSeek Harness…</div>
+      <div id="b-goal" class="hidden"></div>
+      <div id="b-stats"></div>
+      <div class="b-actions">
+        <button id="act-start-dsh" class="offline-action" title="启动本机 DSH Web">▶️ 运行 DSH</button>
+        <button id="act-web" title="打开 DSH Web 界面">🌐 打开 Web</button>
+        <button id="act-dir" title="打开当前工作目录">📂 目录</button>
+        <button id="act-refresh" title="刷新状态">🔄</button>
+      </div>
+      <div class="b-tail"></div>
+    </div>
+
+    <div id="whale-wrap" class="st-offline">
+      <svg id="whaleSvg" viewBox="0 0 240 240" width="240" height="240" aria-label="DeepSeek 鲸鱼">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#93abff"/>
+            <stop offset="45%" stop-color="#4d6bfe"/>
+            <stop offset="100%" stop-color="#3044d6"/>
+          </linearGradient>
+          <linearGradient id="bellyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#d9e3ff"/>
+          </linearGradient>
+          <linearGradient id="finGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6d86ff"/>
+            <stop offset="100%" stop-color="#3a4fd8"/>
+          </linearGradient>
+          <linearGradient id="spoutGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#d4ecff"/>
+            <stop offset="100%" stop-color="#8ecbff"/>
+          </linearGradient>
+          <clipPath id="bodyClip">
+            <path d="M 52 138 C 54 114 70 96 96 92 C 126 88 156 94 176 108 C 190 118 198 128 198 142 C 198 156 188 166 170 172 C 144 180 100 180 74 170 C 58 164 50 154 52 138 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- ========== 道具层(底层): 笔记本电脑 ========== -->
+        <g class="prop laptop">
+          <path d="M 14 196 L 26 150 L 88 150 L 100 196 Z" fill="#242e4d"/>
+          <path d="M 30 154 L 84 154 L 94 192 L 20 192 Z" fill="#d8e6ff"/>
+          <rect class="code c1" x="34" y="164" width="36" height="4" rx="2" fill="#4d6bfe"/>
+          <rect class="code c2" x="34" y="173" width="25" height="4" rx="2" fill="#7fd6a8"/>
+          <rect class="code c3" x="34" y="182" width="42" height="4" rx="2" fill="#ffb35c"/>
+          <rect class="code c4" x="34" y="155" width="18" height="4" rx="2" fill="#ff7fa8"/>
+          <rect class="cursor" x="76" y="182" width="3" height="4" fill="#26339c"/>
+          <path d="M 32 156 L 50 156 L 36 190 L 26 190 Z" fill="#ffffff" opacity="0.3"/>
+          <rect x="14" y="196" width="88" height="10" rx="3" fill="#242e4d"/>
+          <rect x="18" y="199" width="80" height="3" fill="#4a5a8a"/>
+        </g>
+
+        <!-- 水波底座 -->
+        <g class="waves">
+          <ellipse class="wave w1" cx="120" cy="216" rx="88" ry="12" fill="#9fd0ff" opacity="0.45"/>
+          <ellipse class="wave w2" cx="120" cy="222" rx="62" ry="8" fill="#c4e6ff" opacity="0.4"/>
+        </g>
+
+        <!-- 尾巴 -->
+        <g class="tail-g">
+          <path class="tail t-top" d="M 186 122 C 204 112 220 100 232 86 C 226 102 214 114 198 122 Z" fill="url(#bodyGrad)" stroke="#26339c" stroke-width="4.5" stroke-linejoin="round"/>
+          <path class="tail t-bot" d="M 186 148 C 204 158 220 170 232 184 C 226 168 214 156 198 148 Z" fill="url(#bodyGrad)" stroke="#26339c" stroke-width="4.5" stroke-linejoin="round"/>
+        </g>
+
+        <!-- 身体 -->
+        <path class="body" d="M 52 138 C 54 114 70 96 96 92 C 126 88 156 94 176 108 C 190 118 198 128 198 142 C 198 156 188 166 170 172 C 144 180 100 180 74 170 C 58 164 50 154 52 138 Z"
+              fill="url(#bodyGrad)" stroke="#26339c" stroke-width="5" stroke-linejoin="round"/>
+        <path class="highlight" d="M 82 106 Q 122 97 168 112" stroke="#ffffff" stroke-opacity="0.55" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+        <!-- 肚皮 -->
+        <ellipse cx="120" cy="158" rx="56" ry="21" fill="url(#bellyGrad)" clip-path="url(#bodyClip)"/>
+        <path class="belly-lines" d="M 96 154 Q 120 161 148 153 M 102 164 Q 124 170 144 162" stroke="#b9c8ff" stroke-width="2.2" stroke-linecap="round" fill="none" clip-path="url(#bodyClip)"/>
+
+        <!-- 胸鳍 (空闲划水) -->
+        <g class="flipper-g">
+          <path class="flipper" d="M 96 150 C 110 139 130 139 142 148 C 130 159 108 161 96 150 Z" fill="url(#finGrad)" stroke="#26339c" stroke-width="4.5" stroke-linejoin="round"/>
+        </g>
+
+        <!-- 腮红 -->
+        <ellipse class="blush" cx="73" cy="133" rx="9" ry="5.2" fill="#ff9db8" opacity="0.9"/>
+
+        <!-- ================= 眼睛库 ================= -->
+        <g class="eyes">
+          <!-- 默认: 有神大眼 (大瞳孔+双高光+下眼睑笑弧) -->
+          <g class="eye normal">
+            <circle class="ew" cx="88" cy="112" r="12.5" fill="#ffffff" stroke="#26339c" stroke-width="3"/>
+            <circle class="ep pupil" cx="89" cy="113.5" r="7" fill="#17236b"/>
+            <circle class="eg1" cx="85.5" cy="110" r="3" fill="#ffffff"/>
+            <circle class="eg2" cx="92.5" cy="117" r="1.7" fill="#ffffff"/>
+            <path class="lower" d="M 78 120 Q 88 126 98 120" stroke="#26339c" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.55"/>
+            <path class="lash" d="M 77 103 Q 84 99 92 100" stroke="#26339c" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="eye happy">
+            <path class="arc" d="M 76 114 Q 88 101 100 114" stroke="#26339c" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="eye closed">
+            <path class="arc" d="M 76 112 Q 88 103 100 112" stroke="#26339c" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="eye yawn">
+            <path class="arc" d="M 74 113 Q 88 102 102 113" stroke="#26339c" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            <path class="yawn-tear" d="M 78 106 C 75 110 75 113 78 115 C 81 113 81 110 78 106 Z" fill="#8ecbff"/>
+          </g>
+          <g class="eye oh">
+            <circle class="dot" cx="83" cy="112" r="5" fill="#26339c"/>
+            <circle class="dot" cx="93" cy="112" r="5" fill="#26339c"/>
+          </g>
+          <g class="eye sad">
+            <ellipse class="ew" cx="88" cy="115" rx="11" ry="12.5" fill="#ffffff" stroke="#26339c" stroke-width="3"/>
+            <circle class="ep pupil" cx="89" cy="118.5" r="6" fill="#17236b"/>
+            <circle class="eg1" cx="86" cy="115" r="2.2" fill="#ffffff"/>
+            <path class="brow" d="M 78 102 Q 88 97 98 103" stroke="#26339c" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="eye dead">
+            <path class="x1" d="M 80 103 L 96 121 M 96 103 L 80 121" stroke="#7c87ad" stroke-width="4.5" stroke-linecap="round"/>
+          </g>
+          <g class="eye focus">
+            <path class="arc" d="M 76 110 Q 88 103 100 110" stroke="#26339c" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            <path class="line" d="M 78 116 Q 88 113 98 116" stroke="#26339c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="eye star">
+            <circle class="ew" cx="88" cy="112" r="12" fill="#ffffff" stroke="#26339c" stroke-width="3"/>
+            <path class="sp" d="M 88 102.5 L 90.5 109 L 97.5 109.5 L 92 113.5 L 93.5 121 L 88 117.5 L 82.5 121 L 84 113.5 L 78.5 109.5 L 85.5 109 Z" fill="#ffd666" stroke="#e8a33d" stroke-width="1.2"/>
+          </g>
+          <g class="eye tight">
+            <path class="lt" d="M 76 108 L 94 116" stroke="#26339c" stroke-width="4" stroke-linecap="round"/>
+            <path class="rt" d="M 100 108 L 82 116" stroke="#26339c" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g class="eye big">
+            <circle class="ew" cx="88" cy="112" r="14" fill="#ffffff" stroke="#26339c" stroke-width="3"/>
+            <circle class="ep pupil" cx="89" cy="113.5" r="6.5" fill="#17236b"/>
+            <circle class="eg1" cx="85" cy="109.5" r="3" fill="#ffffff"/>
+            <circle class="eg2" cx="92.5" cy="117.5" r="1.6" fill="#ffffff"/>
+          </g>
+          <g class="eye dizzy">
+            <circle class="ew" cx="88" cy="112" r="9" fill="#ffffff" stroke="#26339c" stroke-width="3"/>
+            <path class="swirl" d="M 81.5 112 A 6.5 6.5 0 0 1 94.5 112 A 6.5 6.5 0 0 1 81.5 112" fill="none" stroke="#7c87ad" stroke-width="2.2"/>
+            <circle class="dot" cx="88" cy="105.5" r="1.6" fill="#7c87ad"/>
+          </g>
+        </g>
+
+        <!-- ================= 嘴巴: 已按需求移除 (无鼻子无嘴) ================= -->
+
+        <!-- 喷水孔 + 喷泉水柱 -->
+        <path class="blowhole" d="M 96 92 Q 100 88 104 90" stroke="#26339c" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <g class="fx-spout">
+          <!-- 主水柱: 中间高柱 -->
+          <path class="spout-main" d="M 90 94 C 86 72 89 58 96 42 C 101 56 103 74 100 94 Z" fill="url(#spoutGrad)"/>
+          <!-- 主柱高光 -->
+          <path class="spout-shine" d="M 95 90 C 93 74 94 62 97 50" stroke="#ffffff" stroke-opacity="0.8" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <!-- 两侧水弧 -->
+          <path class="spout-a" d="M 86 94 C 74 80 66 74 58 66" stroke="#8ecbff" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+          <path class="spout-c" d="M 108 94 C 118 78 126 72 136 64" stroke="#8ecbff" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+          <!-- 水珠 -->
+          <circle class="drop d1" cx="98" cy="40" r="4.2" fill="#b7e0ff"/>
+          <circle class="drop d2" cx="88" cy="54" r="3" fill="#d4ecff"/>
+          <circle class="drop d3" cx="106" cy="56" r="3.4" fill="#d4ecff"/>
+          <circle class="drop d4" cx="56" cy="60" r="3" fill="#b7e0ff"/>
+          <circle class="drop d5" cx="138" cy="58" r="3" fill="#b7e0ff"/>
+          <circle class="drop d6" cx="84" cy="34" r="2.4" fill="#e4f2ff"/>
+          <circle class="drop d7" cx="110" cy="40" r="2.6" fill="#e4f2ff"/>
+          <!-- 喷溅星点 -->
+          <circle class="sparkle k1" cx="80" cy="84" r="2.2" fill="#ffffff"/>
+          <circle class="sparkle k2" cx="114" cy="82" r="2.2" fill="#ffffff"/>
+          <circle class="sparkle k3" cx="102" cy="88" r="1.6" fill="#d4ecff"/>
+        </g>
+        <g class="fx-bubbles">
+          <circle class="bub b1" cx="44" cy="146" r="3.8" fill="#a8d8ff"/>
+          <circle class="bub b2" cx="38" cy="160" r="2.9" fill="#c4e6ff"/>
+          <circle class="bub b3" cx="52" cy="170" r="2.4" fill="#a8d8ff"/>
+        </g>
+
+        <!-- ================= 道具库 ================= -->
+        <!-- 工作: 眼镜 -->
+        <g class="prop glasses">
+          <circle cx="88" cy="112" r="16.5" fill="#ffffff" fill-opacity="0.18" stroke="#2b2b2b" stroke-width="3.6"/>
+          <path d="M 104.5 112 L 122 112" stroke="#2b2b2b" stroke-width="3.6"/>
+          <path d="M 71.5 112 L 56 106" stroke="#2b2b2b" stroke-width="3.2"/>
+          <path d="M 81 103 Q 87 100 93 102" stroke="#ffffff" stroke-opacity="0.9" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- 工作: 打字鳍 (伸向键盘) -->
+        <g class="prop typing-fin">
+          <path d="M 120 152 C 116 172 106 190 90 204 C 98 210 114 200 126 180 C 132 168 130 158 120 152 Z" fill="url(#finGrad)" stroke="#26339c" stroke-width="4.5" stroke-linejoin="round"/>
+          <path class="keystar" d="M 84 186 L 86.5 191 L 92 191.5 L 87.5 194.5 L 89 200 L 84 197 L 79 200 L 80.5 194.5 L 76 191.5 L 81.5 191 Z" fill="#ffd666"/>
+        </g>
+        <!-- 工作: 汗滴 -->
+        <g class="prop sweat">
+          <path class="sweat" d="M 120 60 C 111 73 111 84 120 89 C 129 84 129 73 120 60 Z" fill="#8ecbff" stroke="#4d6bfe" stroke-width="2.4"/>
+        </g>
+        <!-- 工作: 速度线 -->
+        <g class="prop speedlines">
+          <path class="sl1" d="M 210 120 L 234 116" stroke="#7d9bff" stroke-width="4" stroke-linecap="round"/>
+          <path class="sl2" d="M 208 138 L 236 138" stroke="#7d9bff" stroke-width="4.5" stroke-linecap="round"/>
+          <path class="sl3" d="M 210 156 L 230 160" stroke="#7d9bff" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <!-- 思考: 灯泡 -->
+        <g class="prop lamp">
+          <circle class="lamp-glow" cx="64" cy="42" r="21" fill="#ffd666" opacity="0.4"/>
+          <circle class="lamp-bulb" cx="64" cy="45" r="12.5" fill="#ffd666" stroke="#e8a33d" stroke-width="2.4"/>
+          <rect class="lamp-base" x="58" y="56" width="12" height="6" rx="2" fill="#e8a33d"/>
+          <path class="lamp-ray" d="M 64 23 L 64 30 M 41 45 L 48 45 M 87 45 L 80 45" stroke="#ffd666" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <!-- 思考: 齿轮 -->
+        <g class="prop gears">
+          <g class="gear g1">
+            <circle cx="118" cy="42" r="8" fill="#ffd666" stroke="#e8a33d" stroke-width="1.6"/>
+            <rect x="115" y="30" width="6" height="6" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="115" y="48" width="6" height="6" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="106" y="39" width="6" height="6" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="124" y="39" width="6" height="6" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <circle cx="118" cy="42" r="2.6" fill="#e8a33d"/>
+          </g>
+          <g class="gear g2">
+            <circle cx="140" cy="52" r="5.5" fill="#ffd666" stroke="#e8a33d" stroke-width="1.4"/>
+            <rect x="138" y="43.5" width="4" height="4" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="138" y="56.5" width="4" height="4" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="132" y="50" width="4" height="4" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+            <rect x="144" y="50" width="4" height="4" rx="1" fill="#ffd666" stroke="#e8a33d" stroke-width="1"/>
+          </g>
+        </g>
+        <!-- 思考: 托腮鳍 -->
+        <g class="prop thinking-fin">
+          <path d="M 96 172 C 84 164 74 152 66 142 C 76 136 90 142 100 154 C 106 162 104 170 96 172 Z" fill="url(#finGrad)" stroke="#26339c" stroke-width="4" stroke-linejoin="round"/>
+        </g>
+        <!-- 等待: 问号泡泡 -->
+        <g class="prop qbubble">
+          <circle class="q-bubble" cx="150" cy="40" r="18" fill="#ffffff" stroke="#4d6bfe" stroke-width="2.6"/>
+          <path class="q-tail" d="M 141 53 L 148 67 L 155 51 Z" fill="#ffffff" stroke="#4d6bfe" stroke-width="2.6" stroke-linejoin="round"/>
+          <text class="q-text" x="150" y="47" text-anchor="middle" font-size="24" font-weight="800" fill="#4d6bfe">?</text>
+        </g>
+        <!-- 完成: 爱心/星星/彩带 -->
+        <g class="prop hearts">
+          <path class="heart h1" d="M 158 86 C 152 78 141 83 141 92 C 141 99 149 104 158 109 C 167 104 175 99 175 92 C 175 83 164 78 158 86 Z" fill="#ff6b9d"/>
+          <path class="heart h2" d="M 44 74 C 39 67 30 71 30 79 C 30 85 37 90 44 94 C 51 90 58 85 58 79 C 58 71 49 67 44 74 Z" fill="#ff8fb3"/>
+          <path class="star s1" d="M 172 66 L 174.5 72 L 181 72.5 L 176 76.5 L 177.5 82.5 L 172 79.5 L 166.5 82.5 L 168 76.5 L 163 72.5 L 169.5 72 Z" fill="#ffd666"/>
+          <path class="star s2" d="M 40 48 L 42 53 L 47.5 53.5 L 43.2 57 L 44.5 62.5 L 40 59.8 L 35.5 62.5 L 36.8 57 L 32.5 53.5 L 38 53 Z" fill="#ffd666"/>
+          <path class="rib r1" d="M 46 60 L 40 72 L 46 68 L 52 76 L 48 64 Z" fill="#7fd6a8"/>
+          <path class="rib r2" d="M 150 62 L 144 74 L 150 70 L 156 78 L 152 66 Z" fill="#ffb35c"/>
+        </g>
+        <!-- 难过: 乌云+雨 -->
+        <g class="prop cloud">
+          <path d="M 96 52 C 92 44 100 40 106 42 C 110 36 120 36 124 42 C 130 40 136 46 132 52 C 136 56 128 60 122 58 C 116 62 100 62 96 58 C 92 56 92 54 96 52 Z" fill="#8a94b8"/>
+          <line class="rain r1" x1="104" y1="62" x2="102" y2="71" stroke="#8ecbff" stroke-width="2.5" stroke-linecap="round"/>
+          <line class="rain r2" x1="114" y1="63" x2="112" y2="73" stroke="#8ecbff" stroke-width="2.5" stroke-linecap="round"/>
+          <line class="rain r3" x1="124" y1="61" x2="122" y2="70" stroke="#8ecbff" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+        <!-- 难过: 大眼泪 -->
+        <g class="prop tear">
+          <path class="tear" d="M 88 128 C 81 137 81 143 88 148 C 95 143 95 137 88 128 Z" fill="#8ecbff" stroke="#4d6bfe" stroke-width="2.5"/>
+        </g>
+        <!-- 睡觉: Zzz -->
+        <g class="prop zzz">
+          <text class="zz z1" x="152" y="64" font-size="22" font-weight="700" fill="#4d6bfe" font-family="Segoe UI, sans-serif">z</text>
+          <text class="zz z2" x="169" y="49" font-size="16" font-weight="700" fill="#7d9bff" font-family="Segoe UI, sans-serif">z</text>
+          <text class="zz z3" x="181" y="38" font-size="12" font-weight="700" fill="#a8c0ff" font-family="Segoe UI, sans-serif">z</text>
+        </g>
+        <!-- 饥饿: 小鱼干 + 咕~ -->
+        <g class="prop fish">
+          <ellipse cx="152" cy="84" rx="14" ry="6.5" fill="#ffb35c" stroke="#d97f2b" stroke-width="2"/>
+          <path d="M 138 84 L 129 78 L 129 90 Z" fill="#ffb35c" stroke="#d97f2b" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="158" cy="82" r="1.6" fill="#26339c"/>
+          <path d="M 160 87 Q 164 89 167 87" stroke="#d97f2b" stroke-width="1.5" fill="none"/>
+        </g>
+        <text class="prop hungry-text" x="62" y="36" font-size="14" font-weight="800" fill="#7c87ad" font-family="Segoe UI, Microsoft YaHei, sans-serif">咕~</text>
+        <!-- 兴奋/惊吓: 火花 / 感叹号 -->
+        <g class="prop sparks">
+          <path class="spark s1" d="M 54 28 L 57 37 L 66 39 L 59 43 L 61 52 L 54 46 L 47 52 L 49 43 L 42 39 L 51 37 Z" fill="#ffd666"/>
+          <path class="spark s2" d="M 136 24 L 138.5 30.5 L 145 31 L 140 35 L 141.5 41.5 L 136 38.5 L 130.5 41.5 L 132 35 L 127 31 L 133.5 30.5 Z" fill="#ffd666"/>
+          <path class="spark s3" d="M 40 62 L 42 66 L 46.5 66.5 L 43 69.5 L 44 74 L 40 71.8 L 36 74 L 37 69.5 L 33.5 66.5 L 38 66 Z" fill="#8ecbff"/>
+        </g>
+        <g class="prop exclaim">
+          <path class="excl-mark" d="M 66 30 L 74 32 L 70 58 L 66 58 Z" fill="#ff5d6c"/>
+          <circle class="excl-dot" cx="70" cy="66" r="4" fill="#ff5d6c"/>
+        </g>
+        <!-- 过热: 蒸汽 -->
+        <g class="prop steam">
+          <path class="stm s1" d="M 92 86 C 88 79 95 75 91 68" stroke="#c9d6ff" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+          <path class="stm s2" d="M 102 86 C 98 77 105 73 101 64" stroke="#c9d6ff" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+          <path class="stm s3" d="M 112 86 C 108 79 115 75 111 68" stroke="#c9d6ff" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- 害羞: 捂脸鳍 -->
+        <g class="prop shy-fin">
+          <path class="cover" d="M 104 122 C 92 118 82 124 78 134 C 84 142 98 142 108 136 C 112 130 110 124 104 122 Z" fill="url(#finGrad)" stroke="#26339c" stroke-width="4" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <script src="pet.js"></script>
+</body>
+</html>
