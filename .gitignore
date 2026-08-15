@@ -1,6 +1,7 @@
 node_modules/
 release/*
 !release/.gitkeep
+preview/*.png
 dist/
 out/
 .DS_Store
